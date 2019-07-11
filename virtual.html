@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+    body{
+        width: 100vw;
+        height: 100vh;
+    }
+    .scroll{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        padding-top: 30px;
+        justify-content: center;
+        overflow: auto;
+        box-sizing: border-box;
+    }
+    .box{
+        margin-left: 18px;
+        margin-bottom: 18px;
+        background: pink;
+        width: 200PX;
+        height: 100PX;
+    }
+    .box img{
+        width: 100%;
+        height: 100%;
+    }
+    </style>
+</head>
+<body>
+    <div class="scroll">
+
+    </div>
+    <script>
+    var scroll=document.querySelector('.scroll')
+    var arr=new Array(1000);
+    var ele='';
+    for(var i=0;i<arr.length;i++){
+       arr[i]=i;
+    }
+    for(var j=0;j<arr.length;j++){
+     ele+=`<div class='box' style={visibility:${i<200?'visible':'hidden'}}><img src='./img/6.jpg'></div>`
+    }
+    scroll.innerHTML=ele;
+    var elements=document.getElementsByClassName('box')
+    console.log(elements)
+    getHeight();
+    function getHeight(e){
+     for(var i=0;i<elements.length;i++){
+         //console.log(elements[i].offsetTop,'test')
+         if(elements[i].offsetTop-document.documentElement.clientHeight-scroll.scrollTop<100&&elements[i].offsetTop+100>scroll.scrollTop){
+            elements[i].style.visibility='visible';
+         }else {
+            elements[i].style.visibility='hidden';
+         }
+     }
+   
+    }
+    window.addEventListener('scroll',getHeight,true)
+    </script>
+</body>
+</html>
